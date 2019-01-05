@@ -1,0 +1,75 @@
+	<div id="myModal" class="modal fade">
+		<div class="modal-dialog">
+		   <div class="modal-content">
+		       <ul class="nav nav-tabs" id="myTab" role="tablist">
+		       	<li class="nav-item">
+		       		<a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+		       	</li>
+ 				<li class="nav-item">
+    				<a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Register</a>
+  				</li>
+				</ul>
+			<div class="tab-content" id="myTabContent">
+  				<div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+  
+  <!-- Login Modal tab  -->
+		<div class="modal-body">
+		    <div th:if="${#request.getParameter('error') == 'true'}"
+            	style="color:red;margin:10px 0px;">
+         			Login Failed!!!<br />
+        		    Reason :
+         		<span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+            		  th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+        		</span>
+            </div>
+            
+            <p>Please enter your email and password.</p>
+		    <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+		         <table>
+		            <tr>
+		               <td>Email:</td>
+		               <td><input type='text' name='username' value=''></td>
+		            </tr>
+		            <tr>
+		               <td>Password:</td>
+		               <td><input type='password' name='password' /></td>
+		            </tr>
+		            <tr>
+		               <td>Remember Me?</td>
+		               <td><input type="checkbox" name="remember-me" /></td>
+		            </tr>            
+		            <tr>
+		               <td><input class="btn btn-primary" name="submit" type="submit" value="Submit" /></td>
+		            </tr>
+		         </table>
+			</form>
+		  </div>
+	</div>
+	<!-- Register Modal Tab -->
+  <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+  <div class="modal-body">
+  		<p>Click here to be sent to our Registration page and sign up for access:</p>
+  		 <table>
+
+  		 	
+		            <tr>
+		            <td>• Favorites</td></tr>
+		            <tr>
+		            <td>• Appointments</td></tr>
+		            <tr>
+		            <td>• Reviews</td>
+		            </tr>
+		       
+		  </table>
+ 	<a class="btn btn-primary col-md-6 offset-md-3" href="/signup" role="button">Sign Up</a>	  
+ </div>
+ </div>
+ 
+
+		       
+		        </div>
+		    </div>
+		</div>
+
+</div>

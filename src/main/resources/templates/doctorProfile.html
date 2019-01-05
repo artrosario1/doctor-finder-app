@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+   	  <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script type="text/javascript" th:src="@{/static/js/test.js}"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   	  <title>DoctorFinder</title>
+   	<style>
+   		.navbar-brand{
+   			font-size:1.5em;
+   		}
+   		.box{
+   			border:1px solid grey;
+   			background-color:#d3d3d3;
+   		 }
+   		 
+   		 .table-wrapper-scroll-y {
+			display: block;
+			height:100%;
+			overflow-y: auto;
+			-ms-overflow-style: -ms-autohiding-scrollbar;
+			overflow:auto;
+		}
+   		
+   		 #profile-image{
+   		 	border:1px solid grey;
+   		    text-align:center;
+   		    height:400px;
+   		    width:100%;
+   		 }
+   		 #image-container{
+   		 	border:1px solid black;
+   		 	height:200px;
+   		 	margin-top:10px;
+   		 	margin-bottom:10px;
+   		 }
+   		 .profile-buttons{
+   		 	height:60px;
+   		 	margin-bottom:20px;
+   		 	border:1px solid black;
+   		 }
+   		 
+   		 #profile-bio{
+   		 	height:400px;
+   		 	width:100%;
+   		 }
+   		 #map{
+			height: 400px;
+			background-color: grey;
+			}
+			#profile-buttons{
+				height: 400px;	
+			}
+   	</style>
+   	<script>
+   	
+	function initMap(){
+		var uluru ={lat:-25.344, lng: 131.06};
+		var map = new google.maps.Map(
+			document.getElementById('map'), 
+			{zoom:15, center:uluru});
+		var marker = new google.maps.Marker(
+				{position: uluru, map: map})
+		google.maps.event.addDomListener(window, 'load', initialize);
+		google.maps.event.addDomListener(window, "resize", function() {
+		 var center = map.getCenter();
+		 google.maps.event.trigger(map, "resize");
+		 map.setCenter(center); 
+		});
+	}
+	
+	$(document).ready(function(){
+	    $(".clickable-row").click(function () {
+	    	 alert("The paragraph was clicked.");
+	    });
+	});
+
+	</script>
+   </head>
+<body  onLoad = "initMap()">
+     
+<!-- NavBar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  	<div class="container">
+	   		 <a class="navbar-brand" href="#">DoctorFinder</a>
+			 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLinks">
+	      		<span class="navbar-toggler-icon"></span>
+	    	  </button>
+	    	<div class="collapse navbar-collapse" id="navbarLinks">
+	  		<ul class="nav navbar-nav">
+	  			<li class="nav-item"><a class="nav-link" href="/">Home</a></li>	
+	  			<li class="nav-item"><a class="nav-link" href="/about">About</a></li>	
+	  			<li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>		
+	  			<li class="nav-item"><a class="nav-link" href="/account">Account</a></li>	
+	  		</ul>
+	  		
+			<form name='f' th:action="@{/j_spring_security_check}" method='POST' class="form-inline ml-auto">
+	  			<div class="form-group mr-sm-1">
+	  				<input type="email" placeholder="Email" class="form-control">
+	  			</div>
+	  			<div class="form-group mr-sm-1">
+	  				<input type="password" placeholder="Password" class="form-control">
+	  			</div>
+	  			<button class="btn btn-success mr-sm-1" type="submit" >Login</button>
+				<a class="btn btn-primary" href="/signup" role="button">Sign Up</a>	  			
+	  		</form>
+		</div>
+	  </div>
+   </nav>
+   
+   
+   <!-- DOCTOR PROFILE -->
+   
+      <div class="container-fluid">
+  		<div class="row">
+  			<div class="container box">
+  				<h2 th:utext="${'Dr. ' + doctor.data.profile.firstName + ' ' + doctor.data.profile.lastName}"></h2>
+  			</div>
+  		</div>
+  		</div>
+  		<div class="container">
+			<div class="row">
+				<div class="container col-md-3 bg-info" id= "profile-image">
+					<div class="container bg-white" id="image-container"><img th:attr="src=${doctor.data.profile.imageUrl}" alt="Card image cap"></div>
+					<div class="container bg-light profile-buttons">Rating</div>
+					<div class="container bg-white profile-buttons">
+				
+						<a th:href="@{/add/doctor/{uid}(uid=${doctor.data.uid})}" class="btn btn-primary">Add to Favorites</a>
+					</div>
+				</div>
+				
+			<div class="container col bg-light" id="profile-details">
+				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  					<li class="nav-item">
+    					<a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Profile</a>
+ 					 </li>
+  					<li class="nav-item">
+   						<a class="nav-link" id="pills-practices-tab" data-toggle="pill" href="#pills-practices" role="tab" aria-controls="pills-practices" aria-selected="false">Practices</a>
+  					</li>
+  					<li class="nav-item">
+   					 <a class="nav-link" id="pills-insurances-tab" data-toggle="pill" href="#pills-insurances" role="tab" aria-controls="pills-insurances" aria-selected="false">Insurances</a>
+  					</li>
+  					<li class="nav-item">
+   					 <a class="nav-link" id="pills-specialties-tab" data-toggle="pill" href="#pills-specialties" role="tab" aria-controls="pills-specialties" aria-selected="false">Specialties</a>
+  					</li>
+				</ul>
+			<div class="tab-content" id="pills-tabContent">
+			  <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+			  	<h3>
+			  		Bio
+			  	</h3>
+			  	<p>
+			  		<div th:utext="${'Dr. ' + doctor.data.profile.bio}"></div>
+			  	</p>
+			  </div>
+			  <div class="tab-pane fade" id="pills-practices" role="tabpanel" aria-labelledby="pills-practices-tab">
+			  			<span th:each="practice : ${doctor.data.practices}">
+										<span th:text="${practice.distance + ' '}"></span>
+									</span>
+			  </div>
+			  <div class="tab-pane fade" id="pills-insurances" role="tabpanel" aria-labelledby="pills-insurances-tab">
+			<span th:each="insurance : ${doctor.data.insurances}">
+										<span th:text="${insurance.insuranceProvider+ ' '}"></span>
+									</span>
+
+			  </div>
+			  <div class="tab-pane fade" id="pills-specialties" role="tabpanel" aria-labelledby="pills-specialties-tab">
+			  	<span th:each="specialty : ${doctor.data.specialties}">
+										<span th:text="${specialty.name + ' '}"></span>
+									</span>
+			
+
+			  </div>
+			</div>
+			</div>
+		</div>
+	</div>
+		<div class="container">
+			<div class="row">
+				<div class="container col align-self-start bg-dark" id= "profile-buttons">
+					<div id="map"></div>
+				</div>
+				
+			</div>
+		</div>
+
+
+        
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhrMRrN4jHkqRcpn0PA3FWMhwxttAc4eE&callback=initMap"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	   	
+</body>
+</html>
