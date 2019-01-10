@@ -317,7 +317,6 @@ public class MainController {
     @GetMapping(value = "/add/doctor/{uid}")
     public String createFavorite(@PathVariable("uid") String uid, @ModelAttribute("doctor") DoctorResponse doctor, HttpServletRequest request,Model model)  throws Exception{
         
-    	
     	Principal principal = request.getUserPrincipal();
     	String email = principal.getName();
 		doctor = doctorService.getDoctorByUid(uid);
