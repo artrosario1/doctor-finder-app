@@ -113,8 +113,8 @@ public class MainController {
 	 * Profile Page
 	 */
 	@RequestMapping("/profile")
-	public String profile(Model model/*, @RequestParam(value="favorites") List<DoctorDto> favorites ,HttpServletRequest request*/) {
-		/*UserEntity userEntity = new UserEntity();
+	public String profile(Model model, @RequestParam(value ="favorites", required=false) List<DoctorDto> favorites ,HttpServletRequest request) {
+		UserEntity userEntity = new UserEntity();
 		List<DoctorDto> returnValue = new ArrayList<DoctorDto>();
 		Principal principal = request.getUserPrincipal();
 		String email = principal.getName();
@@ -123,8 +123,8 @@ public class MainController {
 	    String userId = userEntity.getUserId();
 	    
 	    returnValue = doctorService.getFavoriteDoctors(userId);
-		*/
-		//model.addAttribute("favorites", returnValue);
+		
+		model.addAttribute("favorites", returnValue);
 		return "profile";
 	}
 
@@ -317,7 +317,7 @@ public class MainController {
     @GetMapping(value = "/add/doctor/{uid}")
     public String createFavorite(@PathVariable("uid") String uid, @ModelAttribute("doctor") DoctorResponse doctor, HttpServletRequest request,Model model)  throws Exception{
         
-    	DoctorRest returnValue = new DoctorRest();
+    	
     	Principal principal = request.getUserPrincipal();
     	String email = principal.getName();
 		doctor = doctorService.getDoctorByUid(uid);
@@ -327,12 +327,19 @@ public class MainController {
         DoctorDto doctorDto = new DoctorDto();
 		BeanUtils.copyProperties(doctor.getData(), doctorDto);
 
-
-		DoctorDto createdFavorite = doctorService.createFavorite(doctorDto, userDto);
-        BeanUtils.copyProperties(createdFavorite, returnValue);
+		//Put favorite in database
+		doctorService.createFavorite(doctorDto, userDto);
         
-  
-       model.addAttribute("doctor", returnValue);
+		UserEntity userEntity = new UserEntity();
+		List<DoctorDto> favoriteDoctors = new ArrayList<DoctorDto>();
+	    BeanUtils.copyProperties(userDto, userEntity);
+	    String userId = userEntity.getUserId();
+	    
+	    //create list of Favortie doctors
+	    favoriteDoctors = doctorService.getFavoriteDoctors(userId);
+		
+		model.addAttribute("favorites", favoriteDoctors);
+        
         
         return "profile";
     }

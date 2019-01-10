@@ -2,7 +2,6 @@ package com.artrosario.doctorfinder.request.model;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UserSignUpRequestModel {

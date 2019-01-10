@@ -13,7 +13,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.artrosario.doctorfinder.entity.DoctorEntity;
 import com.artrosario.doctorfinder.entity.UserEntity;
-import com.artrosario.doctorfinder.exception.UserServiceException;
 import com.artrosario.doctorfinder.repos.DoctorRepository;
 import com.artrosario.doctorfinder.repos.UserRepository;
 import com.artrosario.doctorfinder.response.model.DoctorResponse;

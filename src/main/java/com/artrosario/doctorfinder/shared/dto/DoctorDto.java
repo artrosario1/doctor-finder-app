@@ -7,7 +7,6 @@ import com.artrosario.doctorfinder.response.model.Insurances;
 import com.artrosario.doctorfinder.response.model.Practices;
 import com.artrosario.doctorfinder.response.model.Profile;
 import com.artrosario.doctorfinder.response.model.Specialties;
-import com.google.gson.annotations.SerializedName;
 
 public class DoctorDto implements Serializable {
 

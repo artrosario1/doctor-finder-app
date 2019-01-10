@@ -86,7 +86,7 @@
   		      <div class="container-fluid">
   				<div class="row">
   					<div class="container box">
-  						<h2>User Information </h2>
+  						<h2>Scheduled Appointments </h2>
   					</div>
   				</div>
   			</div>
@@ -94,24 +94,28 @@
   		
   		<div class="col-8" id="user-container">
   		<div class="container box">
-  						<h2>My Favorite Doctors </h2>
-  					</div>
-  					<!--
-  					<table>
+  			
+  				<table class="table">
+ 				 	<thead>
+					    <tr>
+					      <th scope="col">My Favorite Doctors</th>
+					    </tr>
+  					</thead>
+  					<tbody>
   						<tr class="clickable-row" th:each="doctor : ${favorites}">
-								<td th:text="${} "></td>
-								
-								</tr>
-								</table>-->
-  		</div>
-  	
-   		</div>
-   </div> 	
+								<td th:text="${doctor.uid} "></td>	
+						</tr>
+  					</tbody>
+			 	</table>
+  			</div>
+		  </div>
+        </div>
+    </div>
+ 	
 
    <th:block th:include="/fragments/_footer"></th:block>
 
 
-   	   
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhrMRrN4jHkqRcpn0PA3FWMhwxttAc4eE&callback=initMap"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

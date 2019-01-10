@@ -12,6 +12,4 @@ import com.artrosario.doctorfinder.entity.UserEntity;
 public interface DoctorRepository extends  CrudRepository<DoctorEntity, Long> {
 	List<DoctorEntity> findAllByFavorites(UserEntity userEntity);
 	DoctorEntity findByUid(String uid);
-
-	
 }

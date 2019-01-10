@@ -1,0 +1,47 @@
+   		.navbar-brand{
+   			font-size:1.5em;
+   		}
+   		.title{
+   			font-size:300%;
+   		}
+   		.center{
+   			text-align:center;
+   		}
+   		 #topContainer{
+   		 	background-image: url("/images/maps.jpeg");
+   		 	height:700px;
+   		 	width:100%;
+   		 	background-size:cover;
+   		 	overflow:auto;
+   		 }
+   		 #middleContainer{
+   		    background-image: url("/images/point2.jpeg");
+   		 	height:700px;
+   		 	width:100%;
+   		 	background-size:cover;
+   		 	overflow:auto;
+   		 }
+   		 #bottomContainer{
+   		    background-image: url("/images/ocean.jpeg");
+   		 	height:700px;
+   		 	width:100%;
+   		 	background-size:cover;
+   		 	overflow:auto;
+   		 }
+   		 #innerContainer{
+   		 	margin-top:100px;
+   		 	overflow: auto; 
+   		 }
+   		 #transparentRow {
+  			background-color: rgba(255, 255, 255, 0.8);
+  			border-radius: 30px;
+  			padding: 10px;
+   		 }
+   		 #innerRow{
+   		 	margin-top:50px;
+   		 	margin-bottom:50px;
+   		 	
+   		 }
+   		 #titleContainer{
+   		    text-align:center;
+   		 } 

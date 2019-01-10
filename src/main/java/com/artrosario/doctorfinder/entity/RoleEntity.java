@@ -11,12 +11,10 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "role", //
-        uniqueConstraints = { //
+        uniqueConstraints = { 
                 @UniqueConstraint(name = "ROLE_UK", columnNames = "role_name") })
 public class RoleEntity implements Serializable{
-    /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -2810388547050837525L;
 
 	@Id
